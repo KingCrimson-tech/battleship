@@ -1,5 +1,6 @@
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const CopyPlugin = require("copy-webpack-plugin")
 
 module.exports = {
   mode: "development",
@@ -25,12 +26,19 @@ module.exports = {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.svg$/i,
+        type: 'asset/resource'
+      }
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       title: "Battleship Game",
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "src/assets", to: "assets" }],
     }),
   ],
   devServer: {
