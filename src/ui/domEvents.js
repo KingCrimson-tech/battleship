@@ -33,6 +33,13 @@ class DOMEvents {
       this.handleNewGame()
     })
 
+    document.getElementById("rotate-ship").addEventListener("click", () => {
+      if (this.gameManager.gamePhase === "setup") {
+        this.gameManager.toggleDirection()
+        this.updateShipPreviews()
+      }
+    })
+
     // Ship rotation (right-click or double-click)
     document.addEventListener("contextmenu", (e) => {
       if (this.gameManager.gamePhase === "setup") {
