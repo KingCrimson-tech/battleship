@@ -351,3 +351,9 @@ body {
     font-size: 1.8rem;
   }
 }
+
+#game-status-area {
+  display: none;
+  text-align: center;
+  margin: 0 auto;
+}

@@ -122,6 +122,8 @@ class DOMEvents {
     this.showSetupPhase()
     this.initializeSetupPhase()
     this.hideGameOverModal()
+    this.updateGameStatus("")
+    document.getElementById("game-status-area").style.display = "none"; 
   }
 
   createGameBoards() {
@@ -238,6 +240,7 @@ class DOMEvents {
   showGamePhase() {
     document.getElementById("setup-phase").style.display = "none"
     document.getElementById("game-phase").style.display = "block"
+    document.getElementById("game-status-area").style.display = "block"
   }
 
   updateGameStatus(message) {
