@@ -40,7 +40,7 @@ class DOMEvents {
       }
     })
 
-    // Ship rotation (right-click or double-click)
+    // Ship rotation (right-click or double-click -> not currently working check once again)
     document.addEventListener("contextmenu", (e) => {
       if (this.gameManager.gamePhase === "setup") {
         e.preventDefault()
@@ -131,6 +131,7 @@ class DOMEvents {
     })
 
     this.updateGameBoards()
+    this.updateStatusArea()
   }
 
   handleComputerBoardClick(row, col) {
@@ -142,6 +143,7 @@ class DOMEvents {
 
     if (result.success) {
       this.updateGameBoards()
+      this.updateStatusArea()
 
       if (result.gameOver) {
         this.handleGameOver(result.winner)
@@ -155,6 +157,7 @@ class DOMEvents {
         const computerResult = this.gameManager.computerAttack()
         if (computerResult) {
           this.updateGameBoards()
+          this.updateStatusArea()
 
           if (computerResult.gameOver) {
             this.handleGameOver(computerResult.winner)
@@ -164,6 +167,31 @@ class DOMEvents {
         }
       }, 1000)
     }
+  }
+
+  updateStatusArea() {
+    // Player
+    const playerHits = this.gameManager.player.gameboard.successfulHits.length
+    document.getElementById("player-hits").textContent = `Hits: ${playerHits}`
+    const playerShipStatus = document.getElementById("player-ship-status")
+    playerShipStatus.innerHTML = ""
+    this.gameManager.player.gameboard.placedShips.forEach(({ ship }, idx) => {
+      const li = document.createElement("li")
+      li.textContent = `${this.gameManager.shipsToPlace[idx].name}: ${ship.isSunk() ? "Sunk" : "Afloat"}`
+      li.style.color = ship.isSunk() ? "#c00" : "#080"
+      playerShipStatus.appendChild(li)
+    })
+    // Computer
+    const computerHits = this.gameManager.computer.gameboard.successfulHits.length
+    document.getElementById("computer-hits").textContent = `Hits: ${computerHits}`
+    const computerShipStatus = document.getElementById("computer-ship-status")
+    computerShipStatus.innerHTML = ""
+    this.gameManager.computer.gameboard.placedShips.forEach(({ ship }, idx) => {
+      const li = document.createElement("li")
+      li.textContent = `${this.gameManager.shipsToPlace[idx].name}: ${ship.isSunk() ? "Sunk" : "Afloat"}`
+      li.style.color = ship.isSunk() ? "#c00" : "#080"
+      computerShipStatus.appendChild(li)
+    })
   }
 
   updateSetupBoard() {
@@ -189,7 +217,7 @@ class DOMEvents {
   }
 
   updateShipPreviews() {
-    // This could be enhanced to show direction indicator
+    // Direction enhancement
     const activeShip = document.querySelector(".ship-item.active")
     if (activeShip) {
       const preview = activeShip.querySelector(".ship-preview")
