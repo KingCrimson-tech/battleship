@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleship Game</title>
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>⚓ Battleship</h1>
+            <div class="game-status">
+                <span id="game-status">Place your ships to start the game</span>
+            </div>
+        </header>
+
+        <div class="setup-phase" id="setup-phase">
+            <div class="setup-container">
+                <h2>Place Your Ships</h2>
+                <div class="ship-placement-info">
+                    <p>Click on your board to place ships. Click again to rotate.</p>
+                    <div class="ships-to-place" id="ships-to-place">
+                        <div class="ship-item active" data-length="5" data-name="Carrier">
+                            <span class="ship-name">Carrier (5)</span>
+                            <div class="ship-preview">
+                                <div class="ship-cell"></div>
+                                <div class="ship-cell"></div>
+                                <div class="ship-cell"></div>
+                                <div class="ship-cell"></div>
+                                <div class="ship-cell"></div>
+                            </div>
+                        </div>
+                        <div class="ship-item" data-length="4" data-name="Battleship">
+                            <span class="ship-name">Battleship (4)</span>
+                            <div class="ship-preview">
+                                <div class="ship-cell"></div>
+                                <div class="ship-cell"></div>
+                                <div class="ship-cell"></div>
+                                <div class="ship-cell"></div>
+                            </div>
+                        </div>
+                        <div class="ship-item" data-length="3" data-name="Cruiser">
+                            <span class="ship-name">Cruiser (3)</span>
+                            <div class="ship-preview">
+                                <div class="ship-cell"></div>
+                                <div class="ship-cell"></div>
+                                <div class="ship-cell"></div>
+                            </div>
+                        </div>
+                        <div class="ship-item" data-length="3" data-name="Submarine">
+                            <span class="ship-name">Submarine (3)</span>
+                            <div class="ship-preview">
+                                <div class="ship-cell"></div>
+                                <div class="ship-cell"></div>
+                                <div class="ship-cell"></div>
+                            </div>
+                        </div>
+                        <div class="ship-item" data-length="2" data-name="Destroyer">
+                            <span class="ship-name">Destroyer (2)</span>
+                            <div class="ship-preview">
+                                <div class="ship-cell"></div>
+                                <div class="ship-cell"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="random-placement" class="btn btn-secondary">Random Placement</button>
+                    <button id="start-game" class="btn btn-primary" disabled>Start Game</button>
+                </div>
+                <div class="setup-board-container">
+                    <div class="board-wrapper">
+                        <h3>Your Fleet</h3>
+                        <div class="board" id="setup-board"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-phase" id="game-phase" style="display: none;">
+            <div class="boards-container">
+                <div class="board-section">
+                    <h3>Your Fleet</h3>
+                    <div class="board" id="player-board"></div>
+                </div>
+                <div class="board-section">
+                    <h3>Enemy Waters</h3>
+                    <div class="board" id="computer-board"></div>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button id="new-game" class="btn btn-secondary">New Game</button>
+            </div>
+        </div>
+
+        <div class="game-over-modal" id="game-over-modal" style="display: none;">
+            <div class="modal-content">
+                <h2 id="game-result"></h2>
+                <p id="game-result-message"></p>
+                <button id="play-again" class="btn btn-primary">Play Again</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
